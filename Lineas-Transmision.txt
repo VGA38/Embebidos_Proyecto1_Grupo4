@@ -1,0 +1,6 @@
+
+***********Transimision******
+gst-launch-1.0 v4l2src device=/dev/video0 ! videoconvert ! jpegenc ! rtpjpegpay ! udpsink host=192.168.1.x port=5000
+
+***********Recepcion*********
+gst-launch-1.0 udpsrc port=5000 ! application/x-rtp,encoding-name=JPEG,payload=26 ! rtpjpegdepay ! jpegdec ! autovideosink
